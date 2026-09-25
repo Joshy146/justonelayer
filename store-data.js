@@ -194,7 +194,7 @@ function submitOrder(event) {
     const address = document.getElementById('cust-address').value;
 
     let total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-    const storeEmail = "joshua@justonelayer.com"; // Change to your business email
+    const storeEmail = "just1lay2026@gmail.com"; // Updated to your business email
     const subject = encodeURIComponent(`New Order from ${name} - Just One Layer`);
     const body = encodeURIComponent(
         `New Order Details:\n\n` +
