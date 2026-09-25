@@ -43,7 +43,7 @@
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         <div class="text-center max-w-2xl mx-auto mb-12">
             <h1 class="text-4xl font-extrabold text-white tracking-tight sm:text-5xl">Explore Our Catalog</h1>
-            <p class="mt-4 text-slate-400">Custom decals up to 2ft x 1ft, apparel with max 8.5x11 prints, drinkware, and handmade essentials.</p>
+            <p class="mt-4 text-slate-400">Custom decals, apparel with max 8.5x11 prints, drinkware, and handmade goods. Free shipping over $30!</p>
         </div>
 
         <!-- Category Filters -->
@@ -58,18 +58,51 @@
     <!-- Cart Drawer Modal -->
     <div id="cart-drawer" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex justify-end">
         <div class="glass w-full max-w-md h-full bg-slate-900 border-l border-slate-800 p-6 flex flex-col shadow-2xl overflow-y-auto">
-            <div class="flex items-center justify-between pb-6 border-b border-slate-800">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
                 <h2 class="text-xl font-bold text-white flex items-center space-x-2">
                     <i class="fa-solid fa-cart-shopping text-sky-400"></i>
                     <span>Your Cart</span>
                 </h2>
                 <button onclick="toggleCart()" class="text-slate-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            <div id="cart-items" class="flex-grow py-6 space-y-4 overflow-y-auto">
-                <p class="text-slate-500 text-center py-10">Your cart is empty.</p>
+
+            <!-- Amazon Style Free Shipping Progress Bar -->
+            <div id="shipping-progress-container" class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700/60 my-4">
+                <div id="shipping-msg" class="text-xs font-semibold text-slate-200 mb-2"></div>
+                <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-700">
+                    <div id="shipping-bar" class="bg-gradient-to-r from-sky-400 to-emerald-400 h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
             </div>
-            <div class="pt-6 border-t border-slate-800 space-y-4">
-                <div class="flex justify-between text-lg font-bold text-white">
+
+            <!-- Distance from Walker, LA Check -->
+            <div class="bg-slate-800/50 p-4 rounded-2xl border border-slate-700/50 mb-4 space-y-2">
+                <label class="block text-xs font-bold text-slate-300">Are you located 50+ miles from Walker, LA?</label>
+                <div class="flex gap-4 text-xs font-semibold">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="radio" name="distance-check" value="under50" checked onchange="updateCartTotals()" class="accent-sky-500">
+                        <span>Within 50 Miles (Free / Pickup)</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="radio" name="distance-check" value="over50" onchange="updateCartTotals()" class="accent-sky-500">
+                        <span>50+ Miles Out (+Shipping)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="cart-items" class="flex-grow space-y-3 overflow-y-auto max-h-56 pr-1">
+                <p class="text-slate-500 text-center py-6 text-sm">Your cart is empty.</p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 space-y-3 mt-auto">
+                <div class="flex justify-between text-xs text-slate-400">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div class="flex justify-between text-xs text-slate-400">
+                    <span>Estimated Shipping:</span>
+                    <span id="cart-shipping-fee">$0.00</span>
+                </div>
+                <div class="flex justify-between text-base font-extrabold text-white pt-2 border-t border-slate-800/80">
                     <span>Total:</span>
                     <span id="cart-total" class="text-sky-400">$0.00</span>
                 </div>
@@ -111,6 +144,7 @@
             <div>
                 <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Contact Us</h4>
                 <ul class="space-y-2.5 text-slate-300">
+                    <li>Walker, LA Base</li>
                     <li>Joshua: <a href="tel:2253646231" class="hover:text-sky-400 transition">(225) 364-6231</a></li>
                     <li>Elise: <a href="tel:2259559585" class="hover:text-sky-400 transition">(225) 955-9585</a></li>
                     <li><a href="mailto:just1lay2026@gmail.com" class="hover:text-sky-400 transition underline">just1lay2026@gmail.com</a></li>
@@ -125,6 +159,7 @@
     <script src="store-data.js"></script>
     <script>
         let cart = JSON.parse(localStorage.getItem('jol_cart')) || [];
+        const STANDARD_SHIPPING_FEE = 6.00; // Flat shipping rate if 50+ miles out and under $30
 
         function initShop() {
             renderCategories();
@@ -255,7 +290,7 @@
         function saveCart() {
             localStorage.setItem('jol_cart', JSON.stringify(cart));
             updateCartBadge();
-            renderCartItems();
+            updateCartTotals();
         }
 
         function updateCartBadge() {
@@ -266,42 +301,75 @@
         function toggleCart() {
             const drawer = document.getElementById('cart-drawer');
             drawer.classList.toggle('hidden');
-            renderCartItems();
+            updateCartTotals();
         }
 
-        function renderCartItems() {
+        function updateCartTotals() {
             const container = document.getElementById('cart-items');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const shippingFeeEl = document.getElementById('cart-shipping-fee');
             const totalEl = document.getElementById('cart-total');
+            
+            const shippingMsg = document.getElementById('shipping-msg');
+            const shippingBar = document.getElementById('shipping-bar');
+
             if(cart.length === 0) {
-                container.innerHTML = `<p class="text-slate-500 text-center py-10">Your cart is empty.</p>`;
+                container.innerHTML = `<p class="text-slate-500 text-center py-6 text-sm">Your cart is empty.</p>`;
+                subtotalEl.textContent = '$0.00';
+                shippingFeeEl.textContent = '$0.00';
                 totalEl.textContent = '$0.00';
+                shippingMsg.innerHTML = `Add <span class="text-sky-400 font-bold">$30.00</span> more for <span class="text-emerald-400 font-bold">FREE Shipping!</span>`;
+                shippingBar.style.width = '0%';
                 return;
             }
 
             container.innerHTML = '';
-            let total = 0;
+            let subtotal = 0;
 
             cart.forEach((item, index) => {
-                total += item.price;
+                subtotal += item.price;
                 let attrString = item.size ? `Size: ${item.size}` : '';
                 for(let key in item.attributes) {
                     attrString += ` | ${key}: ${item.attributes[key]}`;
                 }
 
                 const div = document.createElement('div');
-                div.className = "flex items-center space-x-4 bg-slate-800/60 p-3 rounded-2xl border border-slate-700/50";
+                div.className = "flex items-center space-x-3 bg-slate-800/60 p-2.5 rounded-2xl border border-slate-700/50";
                 div.innerHTML = `
-                    <img src="${item.image}" alt="" class="w-16 h-16 object-cover rounded-xl">
+                    <img src="${item.image}" alt="" class="w-14 h-14 object-cover rounded-xl">
                     <div class="flex-grow">
-                        <h4 class="text-sm font-bold text-white">${item.name}</h4>
-                        <p class="text-xs text-slate-400">${attrString}</p>
+                        <h4 class="text-xs font-bold text-white">${item.name}</h4>
+                        <p class="text-[10px] text-slate-400">${attrString}</p>
                         <span class="text-xs font-extrabold text-sky-400">$${item.price.toFixed(2)}</span>
                     </div>
                     <button onclick="removeItem(${index})" class="text-slate-500 hover:text-rose-400 p-2"><i class="fa-solid fa-trash text-xs"></i></button>
                 `;
                 container.appendChild(div);
             });
-            totalEl.textContent = `$${total.toFixed(2)}`;
+
+            // Free Shipping Progress Calculation ($30 threshold)
+            const threshold = STORE_CONFIG.freeShippingThreshold;
+            let progressPercent = (subtotal / threshold) * 100;
+            if(progressPercent > 100) progressPercent = 100;
+            shippingBar.style.width = `${progressPercent}%`;
+
+            if(subtotal >= threshold) {
+                shippingMsg.innerHTML = `<i class="fa-solid fa-check-circle text-emerald-400 mr-1"></i> You unlocked <span class="text-emerald-400 font-bold">FREE Shipping!</span>`;
+            } else {
+                let diff = (threshold - subtotal).toFixed(2);
+                shippingMsg.innerHTML = `Add <span class="text-sky-400 font-bold">$${diff}</span> more for <span class="text-emerald-400 font-bold">FREE Shipping!</span>`;
+            }
+
+            // Distance Check Shipping Fee
+            const distanceRadio = document.querySelector('input[name="distance-check"]:checked');
+            let shippingFee = 0;
+            if(distanceRadio && distanceRadio.value === 'over50' && subtotal < threshold) {
+                shippingFee = STANDARD_SHIPPING_FEE;
+            }
+
+            subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+            shippingFeeEl.textContent = shippingFee === 0 ? 'FREE' : `$${shippingFee.toFixed(2)}`;
+            totalEl.textContent = `$${(subtotal + shippingFee).toFixed(2)}`;
         }
 
         function removeItem(index) {
@@ -311,13 +379,21 @@
 
         function checkout() {
             if(cart.length === 0) return alert('Your cart is empty!');
-            let summary = "Hello Just One Layer,\n\nI'd like to place an order for the following items:\n\n";
-            let total = 0;
+            
+            let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+            const distanceRadio = document.querySelector('input[name="distance-check"]:checked');
+            let shippingFee = (distanceRadio && distanceRadio.value === 'over50' && subtotal < STORE_CONFIG.freeShippingThreshold) ? STANDARD_SHIPPING_FEE : 0;
+            let total = subtotal + shippingFee;
+            let locationStatus = distanceRadio && distanceRadio.value === 'over50' ? '50+ miles out from Walker, LA (Shipping fee applied)' : 'Within 50 miles of Walker, LA (Free / Local options)';
+
+            let summary = `Hello Just One Layer,\n\nI'd like to place an order for the following items:\n\n`;
             cart.forEach(item => {
-                total += item.price;
                 let attrString = item.size ? `(Size: ${item.size})` : '';
                 summary += `- ${item.name} ${attrString}: $${item.price.toFixed(2)}\n`;
             });
+            summary += `\nSubtotal: $${subtotal.toFixed(2)}`;
+            summary += `\nLocation: ${locationStatus}`;
+            summary += `\nShipping: ${shippingFee === 0 ? 'FREE' : '$' + shippingFee.toFixed(2)}`;
             summary += `\nTotal: $${total.toFixed(2)}\n\nPlease let me know how to proceed with payment and fulfillment!`;
 
             window.location.href = `mailto:${STORE_CONFIG.supportEmail}?subject=New Order Request&body=${encodeURIComponent(summary)}`;
