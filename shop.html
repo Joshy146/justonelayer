@@ -31,7 +31,7 @@
                 <a href="tos.html" class="hover:text-sky-400 transition">Terms</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <button onclick="toggleCart()" class="relative bg-slate-800/80 hover:bg-slate-700 text-white p-3 rounded-full border border-slate-700 transition flex items-center justify-center">
+                <button onclick="toggleCart()" class="relative bg-slate-800/80 hover:bg-slate-700 text-white p-3 rounded-full border border-slate-700 transition flex items-center justify-center cursor-pointer">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span id="cart-badge" class="absolute -top-1 -right-1 bg-sky-500 text-slate-950 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
                 </button>
@@ -48,7 +48,7 @@
 
         <!-- Category Filters -->
         <div id="category-filters" class="flex flex-wrap justify-center gap-3 mb-12">
-            <button onclick="filterCategory('all')" data-cat="all" class="cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-sky-500 text-slate-950 shadow-lg shadow-sky-500/20">All Products</button>
+            <button onclick="filterCategory('all')" data-cat="all" class="cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-sky-500 text-slate-950 shadow-lg shadow-sky-500/20 cursor-pointer">All Products</button>
         </div>
 
         <!-- Product Grid -->
@@ -63,7 +63,7 @@
                     <i class="fa-solid fa-cart-shopping text-sky-400"></i>
                     <span>Your Cart</span>
                 </h2>
-                <button onclick="toggleCart()" class="text-slate-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button onclick="toggleCart()" class="text-slate-400 hover:text-white p-2 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
 
             <!-- Free Shipping Progress Bar -->
@@ -106,7 +106,6 @@
                     <span>Total:</span>
                     <span id="cart-total" class="text-sky-400">$0.00</span>
                 </div>
-                <!-- Bulletproof Inline Trigger -->
                 <button type="button" onclick="openCheckoutModal()" class="w-full py-3.5 bg-gradient-to-r from-sky-400 to-indigo-500 hover:from-sky-500 hover:to-indigo-600 text-slate-950 font-extrabold rounded-xl transition shadow-lg cursor-pointer">Proceed to Checkout</button>
             </div>
         </div>
@@ -117,20 +116,20 @@
         <div class="glass w-full max-w-lg bg-slate-900 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between pb-4 border-b border-slate-800">
                 <h3 class="text-xl font-bold text-white">Checkout Information</h3>
-                <button type="button" onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button type="button" onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white p-2 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             <form id="checkout-form" onsubmit="submitOrder(event)" class="space-y-4 text-xs sm:text-sm">
                 <div>
                     <label class="block font-bold text-slate-300 mb-1">Full Name</label>
-                    <input type="text" id="cust-name" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="Joshua Mansfield">
+                    <input type="text" id="cust-name" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="Enter your full name">
                 </div>
                 <div>
                     <label class="block font-bold text-slate-300 mb-1">Email Address</label>
-                    <input type="email" id="cust-email" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="your@email.com">
+                    <input type="email" id="cust-email" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="name@example.com">
                 </div>
                 <div>
                     <label class="block font-bold text-slate-300 mb-1">Phone Number</label>
-                    <input type="tel" id="cust-phone" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="(225) 364-6231">
+                    <input type="tel" id="cust-phone" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="(555) 000-0000">
                 </div>
                 <div>
                     <label class="block font-bold text-slate-300 mb-1">Shipping Address / Delivery Notes</label>
@@ -138,6 +137,47 @@
                 </div>
                 <button type="submit" class="w-full py-4 bg-gradient-to-r from-sky-400 to-indigo-500 text-slate-950 font-extrabold rounded-xl transition shadow-lg mt-4 cursor-pointer">Place Order & Send Details</button>
             </form>
+        </div>
+    </div>
+
+    <!-- Order Success / Dispatch Modal -->
+    <div id="success-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="glass w-full max-w-lg bg-slate-900 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6">
+            <div class="text-center space-y-2">
+                <div class="w-14 h-14 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-white">Order Ready to Send!</h3>
+                <p class="text-slate-400 text-xs sm:text-sm">Choose an option below to send your order summary to our email and phone lines.</p>
+            </div>
+
+            <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700 space-y-3">
+                <div class="flex justify-between items-center text-xs text-slate-300 font-bold border-b border-slate-700 pb-2">
+                    <span>Generated Order Summary</span>
+                    <button type="button" onclick="copyOrderText()" class="text-sky-400 hover:text-sky-300 flex items-center space-x-1 cursor-pointer">
+                        <i class="fa-regular fa-copy"></i>
+                        <span id="copy-btn-text">Copy Text</span>
+                    </button>
+                </div>
+                <textarea id="order-summary-output" readonly rows="5" class="w-full bg-slate-900 text-slate-300 text-xs p-3 rounded-xl border border-slate-700 focus:outline-none font-mono"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <a id="email-action-btn" href="#" target="_blank" class="py-3 px-4 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs rounded-xl text-center transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Email Business</span>
+                </a>
+                <a id="sms-joshua-btn" href="#" class="py-3 px-4 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl text-center transition flex items-center justify-center space-x-2 border border-slate-700">
+                    <i class="fa-solid fa-comment-sms text-sky-400"></i>
+                    <span>Text Joshua</span>
+                </a>
+                <a id="sms-elise-btn" href="#" class="py-3 px-4 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl text-center transition flex items-center justify-center space-x-2 border border-slate-700 sm:col-span-2">
+                    <i class="fa-solid fa-comment-sms text-sky-400"></i>
+                    <span>Text Elise</span>
+                </a>
+            </div>
+
+            <button type="button" onclick="finishOrder()" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl transition cursor-pointer">Close & Clear Cart</button>
         </div>
     </div>
 
@@ -190,6 +230,7 @@
     <script>
         let cart = JSON.parse(localStorage.getItem('jol_cart')) || [];
         const STANDARD_SHIPPING_FEE = 6.00;
+        let generatedOrderText = "";
 
         function initShop() {
             renderCategories();
@@ -203,7 +244,7 @@
             CATEGORIES.forEach(cat => {
                 const btn = document.createElement('button');
                 btn.onclick = () => filterCategory(cat.id);
-                btn.className = "cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/60";
+                btn.className = "cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/65 cursor-pointer";
                 btn.setAttribute('data-cat', cat.id);
                 btn.textContent = cat.name;
                 container.appendChild(btn);
@@ -213,9 +254,9 @@
         function filterCategory(catId) {
             document.querySelectorAll('.cat-btn').forEach(b => {
                 if(b.getAttribute('data-cat') === catId) {
-                    b.className = "cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-sky-500 text-slate-950 shadow-lg shadow-sky-500/20";
+                    b.className = "cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-sky-500 text-slate-950 shadow-lg shadow-sky-500/20 cursor-pointer";
                 } else {
-                    b.className = "cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/60";
+                    b.className = "cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/60 cursor-pointer";
                 }
             });
             renderProducts(catId);
@@ -375,7 +416,7 @@
                         <p class="text-[10px] text-slate-400">${attrString}</p>
                         <span class="text-xs font-extrabold text-sky-400">$${item.price.toFixed(2)}</span>
                     </div>
-                    <button onclick="removeItem(${index})" class="text-slate-500 hover:text-rose-400 p-2"><i class="fa-solid fa-trash text-xs"></i></button>
+                    <button onclick="removeItem(${index})" class="text-slate-500 hover:text-rose-400 p-2 cursor-pointer"><i class="fa-solid fa-trash text-xs"></i></button>
                 `;
                 container.appendChild(div);
             });
@@ -438,23 +479,49 @@
             let total = subtotal + shippingFee;
             let locationStatus = distanceRadio && distanceRadio.value === 'over50' ? '50+ miles out from Walker, LA (Shipping fee applied)' : 'Within 50 miles of Walker, LA (Free / Local options)';
 
-            let summary = `New Order from Just One Layer Website:\n\n`;
-            summary += `Customer Name: ${name}\n`;
-            summary += `Email: ${email}\n`;
-            summary += `Phone: ${phone}\n`;
-            summary += `Address / Notes: ${address}\n\n`;
-            summary += `Items Ordered:\n`;
+            generatedOrderText = `--- NEW ORDER ---\n`;
+            generatedOrderText += `Name: ${name}\n`;
+            generatedOrderText += `Email: ${email}\n`;
+            generatedOrderText += `Phone: ${phone}\n`;
+            generatedOrderText += `Address/Notes: ${address}\n\n`;
+            generatedOrderText += `Items:\n`;
             cart.forEach(item => {
                 let attrString = item.size ? `(Size: ${item.size})` : '';
-                summary += `- ${item.name} ${attrString}: $${item.price.toFixed(2)}\n`;
+                generatedOrderText += `• ${item.name} ${attrString} - $${item.price.toFixed(2)}\n`;
             });
-            summary += `\nSubtotal: $${subtotal.toFixed(2)}`;
-            summary += `\nLocation: ${locationStatus}`;
-            summary += `\nShipping: ${shippingFee === 0 ? 'FREE' : '$' + shippingFee.toFixed(2)}`;
-            summary += `\nTotal: $${total.toFixed(2)}`;
+            generatedOrderText += `\nSubtotal: $${subtotal.toFixed(2)}`;
+            generatedOrderText += `\nLocation: ${locationStatus}`;
+            generatedOrderText += `\nShipping: ${shippingFee === 0 ? 'FREE' : '$' + shippingFee.toFixed(2)}`;
+            generatedOrderText += `\nTotal: $${total.toFixed(2)}`;
+
+            // Populate dispatch modal
+            document.getElementById('order-summary-output').value = generatedOrderText;
 
             const supportEmail = typeof STORE_CONFIG !== 'undefined' ? STORE_CONFIG.supportEmail : 'just1lay2026@gmail.com';
-            window.location.href = `mailto:${supportEmail}?subject=Order from ${encodeURIComponent(name)}&body=${encodeURIComponent(summary)}`;
+            document.getElementById('email-action-btn').href = `mailto:${supportEmail}?subject=Order from ${encodeURIComponent(name)}&body=${encodeURIComponent(generatedOrderText)}`;
+            
+            // Set SMS links for Joshua (2253646231) and Elise (2259559585)
+            document.getElementById('sms-joshua-btn').href = `sms:2253646231?body=${encodeURIComponent(generatedOrderText)}`;
+            document.getElementById('sms-elise-btn').href = `sms:2259559585?body=${encodeURIComponent(generatedOrderText)}`;
+
+            // Hide checkout modal, show success modal
+            closeCheckoutModal();
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+
+        function copyOrderText() {
+            navigator.clipboard.writeText(generatedOrderText).then(() => {
+                const btnText = document.getElementById('copy-btn-text');
+                btnText.textContent = "Copied!";
+                setTimeout(() => { btnText.textContent = "Copy Text"; }, 2000);
+            });
+        }
+
+        function finishOrder() {
+            cart = [];
+            saveCart();
+            document.getElementById('success-modal').classList.add('hidden');
+            window.location.href = 'index.html';
         }
 
         window.onload = initShop;
