@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Just One Layer | Custom Decals, Apparel & More</title>
+    <title>Just One Layer | Custom Decals, Apparel & Goods</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,8 +11,6 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: #f8fafc; }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
         .gradient-text { background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glow-btn { box-shadow: 0 0 25px rgba(56, 189, 248, 0.4); transition: all 0.3s ease; }
-        .glow-btn:hover { box-shadow: 0 0 35px rgba(56, 189, 248, 0.7); transform: translateY(-2px); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
@@ -30,9 +28,10 @@
                 <a href="story.html" class="hover:text-sky-400 transition">Our Story</a>
                 <a href="faq.html" class="hover:text-sky-400 transition">FAQ</a>
                 <a href="guide.html" class="hover:text-sky-400 transition">Guide</a>
+                <a href="tos.html" class="hover:text-sky-400 transition">Terms</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <a href="shop.html#cart" class="relative bg-slate-800/80 hover:bg-slate-700 text-white p-3 rounded-full border border-slate-700 transition flex items-center justify-center">
+                <a href="shop.html" class="relative bg-slate-800/80 hover:bg-slate-700 text-white p-3 rounded-full border border-slate-700 transition flex items-center justify-center">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span id="cart-badge" class="absolute -top-1 -right-1 bg-sky-500 text-slate-950 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
                 </a>
@@ -41,25 +40,19 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative overflow-hidden py-24 lg:py-32 flex-grow flex items-center">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-900/20 via-slate-900/40 to-slate-950 pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass border border-sky-500/30 text-sky-400 text-sm font-semibold mb-6 animate-pulse">
-                <i class="fa-solid fa-bolt"></i> <span>Clean, Bold, Single-Layer Precision</span>
-            </div>
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight mb-8">
-                Bold Statements. <span class="gradient-text">Zero Complexity.</span>
+    <section class="relative overflow-hidden py-24 sm:py-32 flex-grow flex items-center">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-900/20 via-slate-950/40 to-slate-950 pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center max-w-3xl">
+            <span class="px-4 py-1.5 rounded-full text-xs font-bold bg-sky-500/10 border border-sky-500/20 text-sky-400 uppercase tracking-widest inline-block mb-6">Custom Decals, Apparel & More</span>
+            <h1 class="text-4xl sm:text-7xl font-black tracking-tight text-white mb-6">
+                Brought to Life in <span class="gradient-text">Just One Layer</span>
             </h1>
-            <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 font-normal">
-                High-quality custom decals, hoodies, sweatpants, keychains, and handmade donkey milk soap built for everyone.
+            <p class="text-lg sm:text-xl text-slate-400 mb-10 leading-relaxed">
+                Specializing in custom vinyl decals up to 2ft x 1ft, apparel with max 8.5x11 prints, insulated drinkware, Gym Rat packages, and handmade goods.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <a href="shop.html" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-bold text-lg glow-btn text-center">
-                    Shop The Collection <i class="fa-solid fa-arrow-right ml-2"></i>
-                </a>
-                <a href="shop.html#bundles" class="w-full sm:w-auto px-8 py-4 rounded-xl glass hover:bg-slate-800 text-white font-semibold text-lg border border-slate-700 transition text-center">
-                    View Bundles & Saves
-                </a>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="shop.html" class="px-8 py-4 bg-gradient-to-r from-sky-400 to-indigo-500 text-slate-950 font-extrabold rounded-2xl shadow-lg hover:from-sky-300 hover:to-indigo-400 transition">Shop Catalog</a>
+                <a href="story.html" class="px-8 py-4 glass text-white font-bold rounded-2xl hover:bg-slate-800 transition border border-slate-700">Our Story</a>
             </div>
         </div>
     </section>
@@ -72,9 +65,7 @@
                     <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center font-extrabold text-sm text-slate-950 shadow">J1</div>
                     <span class="text-lg font-black tracking-tight text-white">Just One Layer</span>
                 </div>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Clean, minimalist decals, apparel, and handmade goods for everyone.
-                </p>
+                <p class="text-slate-400 text-sm leading-relaxed">Clean, minimalist decals, apparel, and handmade goods.</p>
             </div>
             <div>
                 <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Navigation</h4>
@@ -84,32 +75,24 @@
                     <li><a href="story.html" class="hover:text-sky-400 transition">Our Story</a></li>
                     <li><a href="faq.html" class="hover:text-sky-400 transition">FAQ</a></li>
                     <li><a href="guide.html" class="hover:text-sky-400 transition">Guide</a></li>
+                    <li><a href="tos.html" class="hover:text-sky-400 transition">Terms of Service</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Categories</h4>
                 <ul class="space-y-2.5">
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Apparel</a></li>
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Drinkware & Auto</a></li>
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Accessories</a></li>
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Donkey Milk Soap</a></li>
+                    <li><a href="shop.html" class="hover:text-sky-400 transition">Decals</a></li>
+                    <li><a href="shop.html" class="hover:text-sky-400 transition">Apparel & Gym Rat</a></li>
+                    <li><a href="shop.html" class="hover:text-sky-400 transition">Drinkware</a></li>
+                    <li><a href="shop.html" class="hover:text-sky-400 transition">Handmade Goods</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Contact Us</h4>
                 <ul class="space-y-2.5 text-slate-300">
-                    <li class="flex items-center space-x-2">
-                        <i class="fa-solid fa-phone text-sky-400 text-xs"></i>
-                        <span>Joshua: <a href="tel:2253646231" class="hover:text-sky-400 transition">(225) 364-6231</a></span>
-                    </li>
-                    <li class="flex items-center space-x-2">
-                        <i class="fa-solid fa-phone text-sky-400 text-xs"></i>
-                        <span>Elise: <a href="tel:2259559585" class="hover:text-sky-400 transition">(225) 955-9585</a></span>
-                    </li>
-                    <li class="flex items-center space-x-2 pt-1">
-                        <i class="fa-solid fa-envelope text-sky-400 text-xs"></i>
-                        <a href="mailto:just1lay2026@gmail.com" class="hover:text-sky-400 transition underline">just1lay2026@gmail.com</a>
-                    </li>
+                    <li>Joshua: <a href="tel:2253646231" class="hover:text-sky-400 transition">(225) 364-6231</a></li>
+                    <li>Elise: <a href="tel:2259559585" class="hover:text-sky-400 transition">(225) 955-9585</a></li>
+                    <li><a href="mailto:just1lay2026@gmail.com" class="hover:text-sky-400 transition underline">just1lay2026@gmail.com</a></li>
                 </ul>
             </div>
         </div>
@@ -119,5 +102,10 @@
     </footer>
 
     <script src="store-data.js"></script>
+    <script>
+        const cart = JSON.parse(localStorage.getItem('jol_cart')) || [];
+        const badge = document.getElementById('cart-badge');
+        if(badge) badge.textContent = cart.length;
+    </script>
 </body>
 </html>
