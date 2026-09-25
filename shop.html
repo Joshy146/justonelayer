@@ -66,7 +66,7 @@
                 <button onclick="toggleCart()" class="text-slate-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
 
-            <!-- Amazon Style Free Shipping Progress Bar -->
+            <!-- Free Shipping Progress Bar -->
             <div id="shipping-progress-container" class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700/60 my-4">
                 <div id="shipping-msg" class="text-xs font-semibold text-slate-200 mb-2"></div>
                 <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-700">
@@ -74,7 +74,7 @@
                 </div>
             </div>
 
-            <!-- Distance from Walker, LA Check -->
+            <!-- Distance Check -->
             <div class="bg-slate-800/50 p-4 rounded-2xl border border-slate-700/50 mb-4 space-y-2">
                 <label class="block text-xs font-bold text-slate-300">Are you located 50+ miles out from Walker, LA?</label>
                 <div class="flex gap-4 text-xs font-semibold">
@@ -106,7 +106,8 @@
                     <span>Total:</span>
                     <span id="cart-total" class="text-sky-400">$0.00</span>
                 </div>
-                <button onclick="openCheckoutModal()" class="w-full py-3.5 bg-gradient-to-r from-sky-400 to-indigo-500 hover:from-sky-500 hover:to-indigo-600 text-slate-950 font-extrabold rounded-xl transition shadow-lg">Proceed to Checkout</button>
+                <!-- Bulletproof Inline Trigger -->
+                <button type="button" onclick="openCheckoutModal()" class="w-full py-3.5 bg-gradient-to-r from-sky-400 to-indigo-500 hover:from-sky-500 hover:to-indigo-600 text-slate-950 font-extrabold rounded-xl transition shadow-lg cursor-pointer">Proceed to Checkout</button>
             </div>
         </div>
     </div>
@@ -116,7 +117,7 @@
         <div class="glass w-full max-w-lg bg-slate-900 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between pb-4 border-b border-slate-800">
                 <h3 class="text-xl font-bold text-white">Checkout Information</h3>
-                <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button type="button" onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             <form id="checkout-form" onsubmit="submitOrder(event)" class="space-y-4 text-xs sm:text-sm">
                 <div>
@@ -129,13 +130,13 @@
                 </div>
                 <div>
                     <label class="block font-bold text-slate-300 mb-1">Phone Number</label>
-                    <input type="tel" id="cust-phone" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="(225) 000-0000">
+                    <input type="tel" id="cust-phone" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="(225) 364-6231">
                 </div>
                 <div>
                     <label class="block font-bold text-slate-300 mb-1">Shipping Address / Delivery Notes</label>
                     <textarea id="cust-address" required rows="3" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="Street address, city, zip code, or local meetup notes..."></textarea>
                 </div>
-                <button type="submit" class="w-full py-4 bg-gradient-to-r from-sky-400 to-indigo-500 text-slate-950 font-extrabold rounded-xl transition shadow-lg mt-4">Place Order & Send Details</button>
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-sky-400 to-indigo-500 text-slate-950 font-extrabold rounded-xl transition shadow-lg mt-4 cursor-pointer">Place Order & Send Details</button>
             </form>
         </div>
     </div>
@@ -198,6 +199,7 @@
 
         function renderCategories() {
             const container = document.getElementById('category-filters');
+            if(!container || typeof CATEGORIES === 'undefined') return;
             CATEGORIES.forEach(cat => {
                 const btn = document.createElement('button');
                 btn.onclick = () => filterCategory(cat.id);
@@ -221,6 +223,7 @@
 
         function renderProducts(catId) {
             const grid = document.getElementById('product-grid');
+            if(!grid || typeof PRODUCTS === 'undefined') return;
             grid.innerHTML = '';
             
             const filtered = catId === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === catId);
@@ -267,7 +270,7 @@
                         <div class="mb-4">${optionsHtml}</div>
                         <div class="flex items-center justify-between pt-4 border-t border-slate-800 mt-auto">
                             <span class="text-xl font-extrabold text-sky-400">$${p.basePrice.toFixed(2)}</span>
-                            ${p.inStock ? `<button onclick="addToCart('${p.id}')" class="px-4 py-2 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs rounded-xl transition shadow">Add to Cart</button>` : `<span class="text-xs font-bold text-slate-500 px-3 py-2 bg-slate-800 rounded-xl">Unavailable</span>`}
+                            ${p.inStock ? `<button onclick="addToCart('${p.id}')" class="px-4 py-2 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs rounded-xl transition shadow cursor-pointer">Add to Cart</button>` : `<span class="text-xs font-bold text-slate-500 px-3 py-2 bg-slate-800 rounded-xl">Unavailable</span>`}
                         </div>
                     </div>
                 `;
@@ -329,8 +332,10 @@
 
         function toggleCart() {
             const drawer = document.getElementById('cart-drawer');
-            drawer.classList.toggle('hidden');
-            updateCartTotals();
+            if(drawer) {
+                drawer.classList.toggle('hidden');
+                updateCartTotals();
+            }
         }
 
         function updateCartTotals() {
@@ -338,17 +343,16 @@
             const subtotalEl = document.getElementById('cart-subtotal');
             const shippingFeeEl = document.getElementById('cart-shipping-fee');
             const totalEl = document.getElementById('cart-total');
-            
             const shippingMsg = document.getElementById('shipping-msg');
             const shippingBar = document.getElementById('shipping-bar');
 
-            if(cart.length === 0) {
-                container.innerHTML = `<p class="text-slate-500 text-center py-6 text-sm">Your cart is empty.</p>`;
-                subtotalEl.textContent = '$0.00';
-                shippingFeeEl.textContent = '$0.00';
-                totalEl.textContent = '$0.00';
-                shippingMsg.innerHTML = `Add <span class="text-sky-400 font-bold">$30.00</span> more for <span class="text-emerald-400 font-bold">FREE Shipping!</span>`;
-                shippingBar.style.width = '0%';
+            if(!container || cart.length === 0) {
+                if(container) container.innerHTML = `<p class="text-slate-500 text-center py-6 text-sm">Your cart is empty.</p>`;
+                if(subtotalEl) subtotalEl.textContent = '$0.00';
+                if(shippingFeeEl) shippingFeeEl.textContent = '$0.00';
+                if(totalEl) totalEl.textContent = '$0.00';
+                if(shippingMsg) shippingMsg.innerHTML = `Add <span class="text-sky-400 font-bold">$30.00</span> more for <span class="text-emerald-400 font-bold">FREE Shipping!</span>`;
+                if(shippingBar) shippingBar.style.width = '0%';
                 return;
             }
 
@@ -376,29 +380,27 @@
                 container.appendChild(div);
             });
 
-            // Free Shipping Progress Calculation ($30 threshold)
-            const threshold = STORE_CONFIG.freeShippingThreshold;
+            const threshold = typeof STORE_CONFIG !== 'undefined' ? STORE_CONFIG.freeShippingThreshold : 30;
             let progressPercent = (subtotal / threshold) * 100;
             if(progressPercent > 100) progressPercent = 100;
-            shippingBar.style.width = `${progressPercent}%`;
+            if(shippingBar) shippingBar.style.width = `${progressPercent}%`;
 
             if(subtotal >= threshold) {
-                shippingMsg.innerHTML = `<i class="fa-solid fa-check-circle text-emerald-400 mr-1"></i> You unlocked <span class="text-emerald-400 font-bold">FREE Shipping!</span>`;
+                if(shippingMsg) shippingMsg.innerHTML = `<i class="fa-solid fa-check-circle text-emerald-400 mr-1"></i> You unlocked <span class="text-emerald-400 font-bold">FREE Shipping!</span>`;
             } else {
                 let diff = (threshold - subtotal).toFixed(2);
-                shippingMsg.innerHTML = `Add <span class="text-sky-400 font-bold">$${diff}</span> more for <span class="text-emerald-400 font-bold">FREE Shipping!</span>`;
+                if(shippingMsg) shippingMsg.innerHTML = `Add <span class="text-sky-400 font-bold">$${diff}</span> more for <span class="text-emerald-400 font-bold">FREE Shipping!</span>`;
             }
 
-            // Distance Check Shipping Fee
             const distanceRadio = document.querySelector('input[name="distance-check"]:checked');
             let shippingFee = 0;
             if(distanceRadio && distanceRadio.value === 'over50' && subtotal < threshold) {
                 shippingFee = STANDARD_SHIPPING_FEE;
             }
 
-            subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-            shippingFeeEl.textContent = shippingFee === 0 ? 'FREE' : `$${shippingFee.toFixed(2)}`;
-            totalEl.textContent = `$${(subtotal + shippingFee).toFixed(2)}`;
+            if(subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+            if(shippingFeeEl) shippingFeeEl.textContent = shippingFee === 0 ? 'FREE' : `$${shippingFee.toFixed(2)}`;
+            if(totalEl) totalEl.textContent = `$${(subtotal + shippingFee).toFixed(2)}`;
         }
 
         function removeItem(index) {
@@ -407,13 +409,19 @@
         }
 
         function openCheckoutModal() {
-            if(cart.length === 0) return alert('Your cart is empty!');
-            document.getElementById('cart-drawer').classList.add('hidden');
-            document.getElementById('checkout-modal').classList.remove('hidden');
+            if(cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            const drawer = document.getElementById('cart-drawer');
+            const modal = document.getElementById('checkout-modal');
+            if(drawer) drawer.classList.add('hidden');
+            if(modal) modal.classList.remove('hidden');
         }
 
         function closeCheckoutModal() {
-            document.getElementById('checkout-modal').classList.add('hidden');
+            const modal = document.getElementById('checkout-modal');
+            if(modal) modal.classList.add('hidden');
         }
 
         function submitOrder(e) {
@@ -425,7 +433,8 @@
 
             let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
             const distanceRadio = document.querySelector('input[name="distance-check"]:checked');
-            let shippingFee = (distanceRadio && distanceRadio.value === 'over50' && subtotal < STORE_CONFIG.freeShippingThreshold) ? STANDARD_SHIPPING_FEE : 0;
+            const threshold = typeof STORE_CONFIG !== 'undefined' ? STORE_CONFIG.freeShippingThreshold : 30;
+            let shippingFee = (distanceRadio && distanceRadio.value === 'over50' && subtotal < threshold) ? STANDARD_SHIPPING_FEE : 0;
             let total = subtotal + shippingFee;
             let locationStatus = distanceRadio && distanceRadio.value === 'over50' ? '50+ miles out from Walker, LA (Shipping fee applied)' : 'Within 50 miles of Walker, LA (Free / Local options)';
 
@@ -444,7 +453,8 @@
             summary += `\nShipping: ${shippingFee === 0 ? 'FREE' : '$' + shippingFee.toFixed(2)}`;
             summary += `\nTotal: $${total.toFixed(2)}`;
 
-            window.location.href = `mailto:${STORE_CONFIG.supportEmail}?subject=Order from ${encodeURIComponent(name)}&body=${encodeURIComponent(summary)}`;
+            const supportEmail = typeof STORE_CONFIG !== 'undefined' ? STORE_CONFIG.supportEmail : 'just1lay2026@gmail.com';
+            window.location.href = `mailto:${supportEmail}?subject=Order from ${encodeURIComponent(name)}&body=${encodeURIComponent(summary)}`;
         }
 
         window.onload = initShop;
