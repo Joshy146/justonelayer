@@ -15,6 +15,7 @@
 </head>
 <body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
 
+    <!-- Navigation -->
     <header class="sticky top-0 z-50 glass border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="index.html" class="flex items-center space-x-2">
@@ -27,9 +28,10 @@
                 <a href="story.html" class="hover:text-sky-400 transition">Our Story</a>
                 <a href="faq.html" class="text-sky-400 font-semibold transition">FAQ</a>
                 <a href="guide.html" class="hover:text-sky-400 transition">Guide</a>
+                <a href="tos.html" class="hover:text-sky-400 transition">Terms</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <a href="shop.html#cart" class="relative bg-slate-800/80 hover:bg-slate-700 text-white p-3 rounded-full border border-slate-700 transition flex items-center justify-center">
+                <a href="shop.html" class="relative bg-slate-800/80 hover:bg-slate-700 text-white p-3 rounded-full border border-slate-700 transition flex items-center justify-center">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span id="cart-badge" class="absolute -top-1 -right-1 bg-sky-500 text-slate-950 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
                 </a>
@@ -37,23 +39,35 @@
         </div>
     </header>
 
+    <!-- Content -->
     <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
-        <div class="text-center mb-12">
-            <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-4">Frequently Asked Questions</h1>
-            <p class="text-slate-400">Everything you need to know about our products, decals, and shipping.</p>
-        </div>
-        <div class="space-y-6">
-            <div class="glass p-6 rounded-2xl border border-slate-700/60">
-                <h3 class="text-lg font-bold text-white mb-2">How durable are the car decals?</h3>
-                <p class="text-slate-300 text-sm">Our outdoor-grade single-layer vinyl is weather-resistant, UV-resistant, and built to withstand car washes and highway elements for years.</p>
+        <div class="glass p-8 sm:p-12 rounded-3xl border border-slate-700/60 shadow-xl space-y-8">
+            <div>
+                <span class="text-sky-400 font-semibold text-sm uppercase tracking-wider">Help & Questions</span>
+                <h1 class="text-3xl sm:text-5xl font-extrabold text-white mt-2 mb-4">Frequently Asked Questions</h1>
             </div>
-            <div class="glass p-6 rounded-2xl border border-slate-700/60">
-                <h3 class="text-lg font-bold text-white mb-2">How do I wash apparel with custom decals?</h3>
-                <p class="text-slate-300 text-sm">Wash inside out in cold water on a gentle cycle. Tumble dry on low heat or hang dry. Do not iron directly on the decal.</p>
-            </div>
-            <div class="glass p-6 rounded-2xl border border-slate-700/60">
-                <h3 class="text-lg font-bold text-white mb-2">What makes donkey milk soap special?</h3>
-                <p class="text-slate-300 text-sm">Donkey milk is packed with vitamins and natural fatty acids that nourish, moisturize, and soothe sensitive skin unlike standard commercial soap bars.</p>
+
+            <div class="space-y-6 text-slate-300 text-sm sm:text-base">
+                <div class="border-b border-slate-800 pb-6">
+                    <h3 class="text-lg font-bold text-white mb-2">What are the size limits for custom decals?</h3>
+                    <p class="text-slate-400">We make custom vinyl decals up to a maximum size of 2 feet long by 1 foot wide. Pricing scales based on the size tier you choose.</p>
+                </div>
+                <div class="border-b border-slate-800 pb-6">
+                    <h3 class="text-lg font-bold text-white mb-2">What are the print size limits for apparel (shirts and pants)?</h3>
+                    <p class="text-slate-400">All custom graphics and prints on shirts, pants, and our Gym Rat packages are restricted to a maximum size of 8.5 x 11 inches.</p>
+                </div>
+                <div class="border-b border-slate-800 pb-6">
+                    <h3 class="text-lg font-bold text-white mb-2">Are coffee mugs available?</h3>
+                    <p class="text-slate-400">Classic coffee mugs are currently sold out, but we offer insulated stainless steel tumblers and glass can tumblers!</p>
+                </div>
+                <div class="border-b border-slate-800 pb-6">
+                    <h3 class="text-lg font-bold text-white mb-2">When will air fresheners and car magnets be available?</h3>
+                    <p class="text-slate-400">Custom car air fresheners and car magnets are currently in development and will be added to the shop soon.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-2">How do I contact support?</h3>
+                    <p class="text-slate-400">You can reach Joshua at <a href="tel:2253646231" class="text-sky-400 underline">(225) 364-6231</a>, Elise at <a href="tel:2259559585" class="text-sky-400 underline">(225) 955-9585</a>, or email us at <a href="mailto:just1lay2026@gmail.com" class="text-sky-400 underline">just1lay2026@gmail.com</a>.</p>
+                </div>
             </div>
         </div>
     </main>
@@ -66,9 +80,7 @@
                     <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center font-extrabold text-sm text-slate-950 shadow">J1</div>
                     <span class="text-lg font-black tracking-tight text-white">Just One Layer</span>
                 </div>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Clean, minimalist decals, apparel, and handmade goods for everyone.
-                </p>
+                <p class="text-slate-400 text-sm leading-relaxed">Clean, minimalist decals, apparel, and handmade goods.</p>
             </div>
             <div>
                 <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Navigation</h4>
@@ -78,32 +90,24 @@
                     <li><a href="story.html" class="hover:text-sky-400 transition">Our Story</a></li>
                     <li><a href="faq.html" class="hover:text-sky-400 transition">FAQ</a></li>
                     <li><a href="guide.html" class="hover:text-sky-400 transition">Guide</a></li>
+                    <li><a href="tos.html" class="hover:text-sky-400 transition">Terms of Service</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Categories</h4>
                 <ul class="space-y-2.5">
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Apparel</a></li>
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Drinkware & Auto</a></li>
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Accessories</a></li>
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Donkey Milk Soap</a></li>
+                    <li><a href="shop.html" class="hover:text-sky-400 transition">Decals</a></li>
+                    <li><a href="shop.html" class="hover:text-sky-400 transition">Apparel & Gym Rat</a></li>
+                    <li><a href="shop.html" class="hover:text-sky-400 transition">Drinkware</a></li>
+                    <li><a href="shop.html" class="hover:text-sky-400 transition">Handmade Goods</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Contact Us</h4>
                 <ul class="space-y-2.5 text-slate-300">
-                    <li class="flex items-center space-x-2">
-                        <i class="fa-solid fa-phone text-sky-400 text-xs"></i>
-                        <span>Joshua: <a href="tel:2253646231" class="hover:text-sky-400 transition">(225) 364-6231</a></span>
-                    </li>
-                    <li class="flex items-center space-x-2">
-                        <i class="fa-solid fa-phone text-sky-400 text-xs"></i>
-                        <span>Elise: <a href="tel:2259559585" class="hover:text-sky-400 transition">(225) 955-9585</a></span>
-                    </li>
-                    <li class="flex items-center space-x-2 pt-1">
-                        <i class="fa-solid fa-envelope text-sky-400 text-xs"></i>
-                        <a href="mailto:just1lay2026@gmail.com" class="hover:text-sky-400 transition underline">just1lay2026@gmail.com</a>
-                    </li>
+                    <li>Joshua: <a href="tel:2253646231" class="hover:text-sky-400 transition">(225) 364-6231</a></li>
+                    <li>Elise: <a href="tel:2259559585" class="hover:text-sky-400 transition">(225) 955-9585</a></li>
+                    <li><a href="mailto:just1lay2026@gmail.com" class="hover:text-sky-400 transition underline">just1lay2026@gmail.com</a></li>
                 </ul>
             </div>
         </div>
@@ -113,5 +117,10 @@
     </footer>
 
     <script src="store-data.js"></script>
+    <script>
+        const cart = JSON.parse(localStorage.getItem('jol_cart')) || [];
+        const badge = document.getElementById('cart-badge');
+        if(badge) badge.textContent = cart.length;
+    </script>
 </body>
 </html>
