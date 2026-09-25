@@ -2,6 +2,9 @@
 const STORE_CONFIG = {
     businessName: "Just One Layer",
     supportEmail: "just1lay2026@gmail.com",
+    baseLocation: "Walker, LA",
+    freeShippingThreshold: 30.00,
+    localRadiusMiles: 50,
     contacts: {
         joshua: "(225) 364-6231",
         elise: "(225) 955-9585"
