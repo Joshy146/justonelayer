@@ -173,8 +173,43 @@ function checkout() {
         alert("Your cart is empty!");
         return;
     }
-    alert("Checkout simulation successful! In a live setup, this links securely to your payment gateway (Stripe/PayPal). Thank you for supporting Just One Layer!");
+    const modal = document.getElementById('checkout-modal');
+    if (modal) {
+        modal.classList.remove('hidden');
+    }
+}
+
+function closeCheckoutModal() {
+    const modal = document.getElementById('checkout-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+    }
+}
+
+function submitOrder(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('cust-name').value;
+    const email = document.getElementById('cust-email').value;
+    const address = document.getElementById('cust-address').value;
+
+    let total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    const storeEmail = "joshua@justonelayer.com"; // Change to your business email
+    const subject = encodeURIComponent(`New Order from ${name} - Just One Layer`);
+    const body = encodeURIComponent(
+        `New Order Details:\n\n` +
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Shipping Address / Notes:\n${address}\n\n` +
+        `Items:\n` + cart.map(item => `${item.qty}x ${item.name} ($${(item.price * item.qty).toFixed(2)})`).join('\n') + `\n\n` +
+        `Total: $${total.toFixed(2)}`
+    );
+
+    window.location.href = `mailto:${storeEmail}?subject=${subject}&body=${body}`;
+
     clearCart();
+    closeCheckoutModal();
+    alert("Thank you! Your order summary has been prepared in your email client. Send the email to complete your order placement!");
 }
 
 // Initialize on page load
