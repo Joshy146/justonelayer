@@ -138,7 +138,6 @@ function renderCart() {
         const subtotal = item.price * item.qty;
         total += subtotal;
         return `
-            py-4 flex items-center justify-between
             <div class="py-4 flex items-center justify-between">
                 <div>
                     <h4 class="font-bold text-white">${item.name}</h4>
