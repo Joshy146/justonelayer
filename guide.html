@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Guide | Just One Layer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .gradient-text { background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
+
+    <header class="sticky top-0 z-50 glass border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center font-extrabold text-xl text-slate-950 shadow-lg">J</div>
+                <span class="text-xl font-black tracking-tight text-white">JUST ONE <span class="gradient-text">LAYER</span></span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-300">
+                <a href="index.html" class="hover:text-sky-400 transition">Home</a>
+                <a href="shop.html" class="hover:text-sky-400 transition">Shop All</a>
+                <a href="story.html" class="hover:text-sky-400 transition">Our Story</a>
+                <a href="faq.html" class="hover:text-sky-400 transition">FAQ</a>
+                <a href="guide.html" class="text-sky-400 font-semibold transition">Guide</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="shop.html#cart" class="relative bg-slate-800/80 hover:bg-slate-700 text-white p-3 rounded-full border border-slate-700 transition flex items-center justify-center">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-sky-500 text-slate-950 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+        <div class="text-center mb-12">
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-4">Application & Care Guide</h1>
+            <p class="text-slate-400">Step-by-step instructions to ensure your decals and goods last as long as possible.</p>
+        </div>
+        <div class="space-y-8">
+            <div class="glass p-8 rounded-2xl border border-slate-700/60">
+                <h3 class="text-xl font-bold text-sky-400 mb-4"><i class="fa-solid fa-car mr-2"></i> How to Apply Car Decals</h3>
+                <ol class="list-decimal list-inside space-y-3 text-slate-300 text-sm sm:text-base">
+                    <li>Clean the surface thoroughly with rubbing alcohol and let it dry completely.</li>
+                    <li>Firmly rub a squeegee or credit card across the decal over the clear transfer tape to ensure the vinyl adheres to the tape.</li>
+                    <li>Slowly peel the paper backing away at a sharp angle. If the vinyl sticks to the paper, press it back down and rub again.</li>
+                    <li>Position the decal on the surface, press down firmly, and slowly peel away the clear transfer tape.</li>
+                </ol>
+            </div>
+            <div class="glass p-8 rounded-2xl border border-slate-700/60">
+                <h3 class="text-xl font-bold text-sky-400 mb-4"><i class="fa-solid fa-shirt mr-2"></i> Apparel Care Instructions</h3>
+                <ul class="list-disc list-inside space-y-3 text-slate-300 text-sm sm:text-base">
+                    <li>Turn hoodies, sweatpants, and shirts inside out before washing.</li>
+                    <li>Machine wash cold with like colors on a gentle cycle.</li>
+                    <li>Tumble dry on low heat or hang to air dry for maximum longevity.</li>
+                    <li>Do not dry clean or iron directly over the vinyl design.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-800 py-12 text-slate-400 text-sm mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2026 Just One Layer. All rights reserved. Built for creators and car culture.</p>
+        </div>
+    </footer>
+
+    <script src="store-data.js"></script>
+</body>
+</html>
