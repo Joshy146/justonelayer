@@ -76,7 +76,7 @@
 
             <!-- Distance from Walker, LA Check -->
             <div class="bg-slate-800/50 p-4 rounded-2xl border border-slate-700/50 mb-4 space-y-2">
-                <label class="block text-xs font-bold text-slate-300">Are you located 50+ miles from Walker, LA?</label>
+                <label class="block text-xs font-bold text-slate-300">Are you located 50+ miles out from Walker, LA?</label>
                 <div class="flex gap-4 text-xs font-semibold">
                     <label class="flex items-center space-x-2 cursor-pointer">
                         <input type="radio" name="distance-check" value="under50" checked onchange="updateCartTotals()" class="accent-sky-500">
@@ -106,8 +106,37 @@
                     <span>Total:</span>
                     <span id="cart-total" class="text-sky-400">$0.00</span>
                 </div>
-                <button onclick="checkout()" class="w-full py-3.5 bg-gradient-to-r from-sky-400 to-indigo-500 hover:from-sky-500 hover:to-indigo-600 text-slate-950 font-extrabold rounded-xl transition shadow-lg">Proceed to Checkout</button>
+                <button onclick="openCheckoutModal()" class="w-full py-3.5 bg-gradient-to-r from-sky-400 to-indigo-500 hover:from-sky-500 hover:to-indigo-600 text-slate-950 font-extrabold rounded-xl transition shadow-lg">Proceed to Checkout</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Checkout Details Modal Form -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="glass w-full max-w-lg bg-slate-900 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                <h3 class="text-xl font-bold text-white">Checkout Information</h3>
+                <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form id="checkout-form" onsubmit="submitOrder(event)" class="space-y-4 text-xs sm:text-sm">
+                <div>
+                    <label class="block font-bold text-slate-300 mb-1">Full Name</label>
+                    <input type="text" id="cust-name" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="Joshua Mansfield">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-300 mb-1">Email Address</label>
+                    <input type="email" id="cust-email" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="your@email.com">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-300 mb-1">Phone Number</label>
+                    <input type="tel" id="cust-phone" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="(225) 000-0000">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-300 mb-1">Shipping Address / Delivery Notes</label>
+                    <textarea id="cust-address" required rows="3" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="Street address, city, zip code, or local meetup notes..."></textarea>
+                </div>
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-sky-400 to-indigo-500 text-slate-950 font-extrabold rounded-xl transition shadow-lg mt-4">Place Order & Send Details</button>
+            </form>
         </div>
     </div>
 
@@ -159,7 +188,7 @@
     <script src="store-data.js"></script>
     <script>
         let cart = JSON.parse(localStorage.getItem('jol_cart')) || [];
-        const STANDARD_SHIPPING_FEE = 6.00; // Flat shipping rate if 50+ miles out and under $30
+        const STANDARD_SHIPPING_FEE = 6.00;
 
         function initShop() {
             renderCategories();
@@ -377,16 +406,35 @@
             saveCart();
         }
 
-        function checkout() {
+        function openCheckoutModal() {
             if(cart.length === 0) return alert('Your cart is empty!');
-            
+            document.getElementById('cart-drawer').classList.add('hidden');
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            const name = document.getElementById('cust-name').value;
+            const email = document.getElementById('cust-email').value;
+            const phone = document.getElementById('cust-phone').value;
+            const address = document.getElementById('cust-address').value;
+
             let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
             const distanceRadio = document.querySelector('input[name="distance-check"]:checked');
             let shippingFee = (distanceRadio && distanceRadio.value === 'over50' && subtotal < STORE_CONFIG.freeShippingThreshold) ? STANDARD_SHIPPING_FEE : 0;
             let total = subtotal + shippingFee;
             let locationStatus = distanceRadio && distanceRadio.value === 'over50' ? '50+ miles out from Walker, LA (Shipping fee applied)' : 'Within 50 miles of Walker, LA (Free / Local options)';
 
-            let summary = `Hello Just One Layer,\n\nI'd like to place an order for the following items:\n\n`;
+            let summary = `New Order from Just One Layer Website:\n\n`;
+            summary += `Customer Name: ${name}\n`;
+            summary += `Email: ${email}\n`;
+            summary += `Phone: ${phone}\n`;
+            summary += `Address / Notes: ${address}\n\n`;
+            summary += `Items Ordered:\n`;
             cart.forEach(item => {
                 let attrString = item.size ? `(Size: ${item.size})` : '';
                 summary += `- ${item.name} ${attrString}: $${item.price.toFixed(2)}\n`;
@@ -394,9 +442,9 @@
             summary += `\nSubtotal: $${subtotal.toFixed(2)}`;
             summary += `\nLocation: ${locationStatus}`;
             summary += `\nShipping: ${shippingFee === 0 ? 'FREE' : '$' + shippingFee.toFixed(2)}`;
-            summary += `\nTotal: $${total.toFixed(2)}\n\nPlease let me know how to proceed with payment and fulfillment!`;
+            summary += `\nTotal: $${total.toFixed(2)}`;
 
-            window.location.href = `mailto:${STORE_CONFIG.supportEmail}?subject=New Order Request&body=${encodeURIComponent(summary)}`;
+            window.location.href = `mailto:${STORE_CONFIG.supportEmail}?subject=Order from ${encodeURIComponent(name)}&body=${encodeURIComponent(summary)}`;
         }
 
         window.onload = initShop;
