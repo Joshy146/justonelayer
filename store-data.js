@@ -13,8 +13,9 @@ const STORE_CONFIG = {
 
 const CATEGORIES = [
     { id: "decals", name: "Decals & Stickers", description: "Custom vinyl decals up to 2 ft long & 1 ft wide." },
-    { id: "apparel", name: "Apparel & Gym Rat", description: "Shirts, pants, and bundles with max 8.5x11 in prints." },
-    { id: "drinkware", name: "Drinkware", description: "Tumblers and glass cups (Coffee mugs sold out)." },
+    { id: "apparel", name: "Apparel & Gym Rat", description: "Shirts, pants, bundles, and accessories." },
+    { id: "drinkware", name: "Drinkware", description: "Tumblers, glass cups, and water bottles." },
+    { id: "accessories", name: "Accessories & Keychains", description: "Customizable vintage-style hotel keychains." },
     { id: "soap", name: "Handmade Goods", description: "Nourishing artisanal donkey milk soaps." },
     { id: "coming-soon", name: "Coming Soon", description: "Upcoming products currently in development." }
 ];
@@ -27,7 +28,7 @@ const PRODUCTS = [
         name: "Custom Vinyl Decal",
         description: "High-grade outdoor vinyl decal. Max dimensions: 2 feet long by 1 foot wide. Price varies by size.",
         basePrice: 5.00,
-        image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600",
+        image: "decal.jpg", // Replace with your actual file name
         inStock: true,
         options: {
             sizes: [
@@ -39,14 +40,14 @@ const PRODUCTS = [
         }
     },
 
-    // --- APPAREL ---
+    // --- APPAREL & GYM RAT ---
     {
         id: "shirt-custom",
         category: "apparel",
         name: "Custom Graphic Tee / Shirt",
         description: "Comfortable apparel featuring custom prints up to 8.5 x 11 inches. Price varies by garment size.",
         basePrice: 18.00,
-        image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=600",
+        image: "shirt.jpg", // Replace with your actual file name
         inStock: true,
         options: {
             sizes: [
@@ -62,7 +63,7 @@ const PRODUCTS = [
         name: "Custom Lounge / Sweatpants",
         description: "Cozy pants with custom branding/prints up to 8.5 x 11 inches. Price varies by size.",
         basePrice: 25.00,
-        image: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?auto=format&fit=crop&q=80&w=600",
+        image: "sweatpants.jpg", // Replace with your actual file name
         inStock: true,
         options: {
             sizes: [
@@ -76,15 +77,30 @@ const PRODUCTS = [
         id: "gym-rat-package",
         category: "apparel",
         name: "Gym Rat Package",
-        description: "The ultimate workout bundle: includes custom apparel (max 8.5x11 print) and a motivational decal set. Price scales with apparel sizing.",
-        basePrice: 35.00,
-        image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=600",
+        description: "The ultimate workout bundle: includes 1x Custom Sweatshirt, 1x Custom Sweatpants, and 1x Custom Water Bottle. Max print size 8.5x11.",
+        basePrice: 55.00,
+        image: "gym-rat-bundle.jpg", // Replace with your actual file name
         inStock: true,
         options: {
             sizes: [
                 { name: "Standard Bundle (S-XL)", priceModifier: 0.00 },
-                { name: "Extended Bundle (2XL-3XL)", priceModifier: 5.00 }
-            ]
+                { name: "Extended Bundle (2XL-3XL)", priceModifier: 8.00 }
+            ],
+            colors: ["Black", "Grey", "Navy"]
+        }
+    },
+
+    // --- ACCESSORIES & KEYCHAINS ---
+    {
+        id: "keychain-hotel-rhombus",
+        category: "accessories",
+        name: "Vintage Style Hotel Rhombus Keychain",
+        description: "Classic retro rhombus hotel keychain. Put your own custom words, numbers, or design on it!",
+        basePrice: 10.00,
+        image: "hotel-keychain.jpg", // Replace with your actual file name
+        inStock: true,
+        options: {
+            colors: ["Classic Black", "Retro White", "Neon Blue", "Vibrant Red"]
         }
     },
 
@@ -95,7 +111,7 @@ const PRODUCTS = [
         name: "Classic Coffee Mug",
         description: "Ceramic coffee mugs.",
         basePrice: 12.00,
-        image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600",
+        image: "coffee-mug.jpg", // Replace with your actual file name
         inStock: false,
         badge: "Sold Out"
     },
@@ -105,7 +121,7 @@ const PRODUCTS = [
         name: "Stainless Steel Tumbler",
         description: "Double-wall vacuum insulated tumbler to keep drinks ice cold or piping hot. Price varies by capacity.",
         basePrice: 22.00,
-        image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&q=80&w=600",
+        image: "tumbler.jpg", // Replace with your actual file name
         inStock: true,
         options: {
             sizes: [
@@ -120,7 +136,7 @@ const PRODUCTS = [
         name: "Glass Can Tumbler",
         description: "Trendy 16oz glass cup with bamboo lid and glass straw option.",
         basePrice: 15.00,
-        image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&q=80&w=600",
+        image: "glass-cup.jpg", // Replace with your actual file name
         inStock: true,
         options: {
             styles: ["Clear Glass", "Frosted Glass"]
@@ -134,7 +150,7 @@ const PRODUCTS = [
         name: "Handmade Donkey Milk Soap",
         description: "Deeply moisturizing artisanal soap crafted with rich donkey milk for sensitive skin.",
         basePrice: 8.00,
-        image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&q=80&w=600",
+        image: "soap.jpg", // Replace with your actual file name
         inStock: true,
         options: {
             scents: ["Unscented Gentle", "Lavender Vanilla", "Oatmeal Honey"]
@@ -148,17 +164,7 @@ const PRODUCTS = [
         name: "Custom Car Air Freshener",
         description: "Personalized hanging air fresheners for your vehicle. Coming soon!",
         basePrice: 6.00,
-        image: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=80&w=600",
-        inStock: false,
-        badge: "Coming Soon"
-    },
-    {
-        id: "car-magnet-custom",
-        category: "coming-soon",
-        name: "Custom Car Magnet",
-        description: "Durable, weather-resistant magnetic signs for vehicles. Coming soon!",
-        basePrice: 14.00,
-        image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600",
+        image: "air-freshener.jpg", // Replace with your actual file name
         inStock: false,
         badge: "Coming Soon"
     }
