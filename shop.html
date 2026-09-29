@@ -8,32 +8,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: #f8fafc; }
-        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .gradient-text { background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; color: #f8fafc; }
+        .glass { background: rgba(20, 20, 20, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .gradient-text { background: linear-gradient(135deg, #ef4444 0%, #ffffff 50%, #991b1b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
+<body class="min-h-screen flex flex-col selection:bg-red-600 selection:text-white">
 
     <!-- Navigation -->
-    <header class="sticky top-0 z-50 glass border-b border-slate-800">
+    <header class="sticky top-0 z-50 glass border-b border-zinc-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="index.html" class="flex items-center space-x-2">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center font-extrabold text-xl text-slate-950 shadow-lg">J</div>
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="logo.png" alt="Logo" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" class="h-10 w-10 object-contain rounded-xl">
+                <div id="fallback-logo" style="display:none;" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-red-600 to-black border border-red-500/40 items-center justify-center font-extrabold text-xl text-white shadow-lg">J</div>
                 <span class="text-xl font-black tracking-tight text-white">JUST ONE <span class="gradient-text">LAYER</span></span>
             </a>
-            <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-300">
-                <a href="index.html" class="hover:text-sky-400 transition">Home</a>
-                <a href="shop.html" class="text-sky-400 font-semibold transition">Shop All</a>
-                <a href="story.html" class="hover:text-sky-400 transition">Our Story</a>
-                <a href="faq.html" class="hover:text-sky-400 transition">FAQ</a>
-                <a href="guide.html" class="hover:text-sky-400 transition">Guide</a>
-                <a href="tos.html" class="hover:text-sky-400 transition">Terms</a>
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-zinc-300">
+                <a href="index.html" class="hover:text-red-500 transition">Home</a>
+                <a href="shop.html" class="text-red-500 font-semibold transition">Shop All</a>
+                <a href="story.html" class="hover:text-red-500 transition">Our Story</a>
+                <a href="faq.html" class="hover:text-red-500 transition">FAQ</a>
+                <a href="guide.html" class="hover:text-red-500 transition">Guide</a>
+                <a href="tos.html" class="hover:text-red-500 transition">Terms</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <button onclick="toggleCart()" class="relative bg-slate-800/80 hover:bg-slate-700 text-white p-3 rounded-full border border-slate-700 transition flex items-center justify-center cursor-pointer">
+                <button onclick="toggleCart()" class="relative bg-zinc-900 hover:bg-zinc-800 text-white p-3 rounded-full border border-zinc-700 transition flex items-center justify-center cursor-pointer">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-sky-500 text-slate-950 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
                 </button>
             </div>
         </div>
@@ -43,12 +44,12 @@
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         <div class="text-center max-w-2xl mx-auto mb-12">
             <h1 class="text-4xl font-extrabold text-white tracking-tight sm:text-5xl">Explore Our Catalog</h1>
-            <p class="mt-4 text-slate-400">Custom decals, apparel with max 8.5x11 prints, drinkware, and handmade goods. Free shipping over $30!</p>
+            <p class="mt-4 text-zinc-400">Custom decals, apparel with max 8.5x11 prints, drinkware, and handmade goods. Free shipping over $30!</p>
         </div>
 
         <!-- Category Filters -->
         <div id="category-filters" class="flex flex-wrap justify-center gap-3 mb-12">
-            <button onclick="filterCategory('all')" data-cat="all" class="cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-sky-500 text-slate-950 shadow-lg shadow-sky-500/20 cursor-pointer">All Products</button>
+            <button onclick="filterCategory('all')" data-cat="all" class="cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-red-600 text-white shadow-lg shadow-red-900/30 cursor-pointer">All Products</button>
         </div>
 
         <!-- Product Grid -->
@@ -56,131 +57,131 @@
     </main>
 
     <!-- Cart Drawer Modal -->
-    <div id="cart-drawer" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex justify-end">
-        <div class="glass w-full max-w-md h-full bg-slate-900 border-l border-slate-800 p-6 flex flex-col shadow-2xl overflow-y-auto">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+    <div id="cart-drawer" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex justify-end">
+        <div class="glass w-full max-w-md h-full bg-zinc-950 border-l border-zinc-800 p-6 flex flex-col shadow-2xl overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-zinc-800">
                 <h2 class="text-xl font-bold text-white flex items-center space-x-2">
-                    <i class="fa-solid fa-cart-shopping text-sky-400"></i>
+                    <i class="fa-solid fa-cart-shopping text-red-500"></i>
                     <span>Your Cart</span>
                 </h2>
-                <button onclick="toggleCart()" class="text-slate-400 hover:text-white p-2 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button onclick="toggleCart()" class="text-zinc-400 hover:text-white p-2 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
 
             <!-- Free Shipping Progress Bar -->
-            <div id="shipping-progress-container" class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700/60 my-4">
-                <div id="shipping-msg" class="text-xs font-semibold text-slate-200 mb-2"></div>
-                <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-700">
-                    <div id="shipping-bar" class="bg-gradient-to-r from-sky-400 to-emerald-400 h-full transition-all duration-500" style="width: 0%"></div>
+            <div id="shipping-progress-container" class="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 my-4">
+                <div id="shipping-msg" class="text-xs font-semibold text-zinc-200 mb-2"></div>
+                <div class="w-full bg-black h-2.5 rounded-full overflow-hidden border border-zinc-800">
+                    <div id="shipping-bar" class="bg-gradient-to-r from-red-600 to-white h-full transition-all duration-500" style="width: 0%"></div>
                 </div>
             </div>
 
             <!-- Distance Check -->
-            <div class="bg-slate-800/50 p-4 rounded-2xl border border-slate-700/50 mb-4 space-y-2">
-                <label class="block text-xs font-bold text-slate-300">Are you located 50+ miles out from Walker, LA?</label>
+            <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800 mb-4 space-y-2">
+                <label class="block text-xs font-bold text-zinc-300">Are you located 50+ miles out from Walker, LA?</label>
                 <div class="flex gap-4 text-xs font-semibold">
                     <label class="flex items-center space-x-2 cursor-pointer">
-                        <input type="radio" name="distance-check" value="under50" checked onchange="updateCartTotals()" class="accent-sky-500">
+                        <input type="radio" name="distance-check" value="under50" checked onchange="updateCartTotals()" class="accent-red-600">
                         <span>Within 50 Miles (Free / Pickup)</span>
                     </label>
                     <label class="flex items-center space-x-2 cursor-pointer">
-                        <input type="radio" name="distance-check" value="over50" onchange="updateCartTotals()" class="accent-sky-500">
+                        <input type="radio" name="distance-check" value="over50" onchange="updateCartTotals()" class="accent-red-600">
                         <span>50+ Miles Out (+Shipping)</span>
                     </label>
                 </div>
             </div>
 
             <div id="cart-items" class="flex-grow space-y-3 overflow-y-auto max-h-56 pr-1">
-                <p class="text-slate-500 text-center py-6 text-sm">Your cart is empty.</p>
+                <p class="text-zinc-500 text-center py-6 text-sm">Your cart is empty.</p>
             </div>
 
-            <div class="pt-4 border-t border-slate-800 space-y-3 mt-auto">
-                <div class="flex justify-between text-xs text-slate-400">
+            <div class="pt-4 border-t border-zinc-800 space-y-3 mt-auto">
+                <div class="flex justify-between text-xs text-zinc-400">
                     <span>Subtotal:</span>
                     <span id="cart-subtotal">$0.00</span>
                 </div>
-                <div class="flex justify-between text-xs text-slate-400">
+                <div class="flex justify-between text-xs text-zinc-400">
                     <span>Estimated Shipping:</span>
                     <span id="cart-shipping-fee">$0.00</span>
                 </div>
-                <div class="flex justify-between text-base font-extrabold text-white pt-2 border-t border-slate-800/80">
+                <div class="flex justify-between text-base font-extrabold text-white pt-2 border-t border-zinc-800">
                     <span>Total:</span>
-                    <span id="cart-total" class="text-sky-400">$0.00</span>
+                    <span id="cart-total" class="text-red-500">$0.00</span>
                 </div>
-                <button type="button" onclick="openCheckoutModal()" class="w-full py-3.5 bg-gradient-to-r from-sky-400 to-indigo-500 hover:from-sky-500 hover:to-indigo-600 text-slate-950 font-extrabold rounded-xl transition shadow-lg cursor-pointer">Proceed to Checkout</button>
+                <button type="button" onclick="openCheckoutModal()" class="w-full py-3.5 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white font-extrabold rounded-xl transition shadow-lg cursor-pointer">Proceed to Checkout</button>
             </div>
         </div>
     </div>
 
     <!-- Checkout Details Modal Form -->
-    <div id="checkout-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="glass w-full max-w-lg bg-slate-900 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+    <div id="checkout-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="glass w-full max-w-lg bg-zinc-950 border border-zinc-800 p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-zinc-800">
                 <h3 class="text-xl font-bold text-white">Checkout Information</h3>
-                <button type="button" onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white p-2 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button type="button" onclick="closeCheckoutModal()" class="text-zinc-400 hover:text-white p-2 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             <form id="checkout-form" onsubmit="submitOrder(event)" class="space-y-4 text-xs sm:text-sm">
                 <div>
-                    <label class="block font-bold text-slate-300 mb-1">Full Name</label>
-                    <input type="text" id="cust-name" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="Enter your full name">
+                    <label class="block font-bold text-zinc-300 mb-1">Full Name</label>
+                    <input type="text" id="cust-name" required class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl p-3 focus:outline-none focus:border-red-600" placeholder="Enter your full name">
                 </div>
                 <div>
-                    <label class="block font-bold text-slate-300 mb-1">Email Address</label>
-                    <input type="email" id="cust-email" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="name@example.com">
+                    <label class="block font-bold text-zinc-300 mb-1">Email Address</label>
+                    <input type="email" id="cust-email" required class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl p-3 focus:outline-none focus:border-red-600" placeholder="name@example.com">
                 </div>
                 <div>
-                    <label class="block font-bold text-slate-300 mb-1">Phone Number</label>
-                    <input type="tel" id="cust-phone" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="(555) 000-0000">
+                    <label class="block font-bold text-zinc-300 mb-1">Phone Number</label>
+                    <input type="tel" id="cust-phone" required class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl p-3 focus:outline-none focus:border-red-600" placeholder="(555) 000-0000">
                 </div>
                 <div>
-                    <label class="block font-bold text-slate-300 mb-1">Shipping Address / Delivery Notes</label>
-                    <textarea id="cust-address" required rows="3" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-sky-500" placeholder="Street address, city, zip code, or local meetup notes..."></textarea>
+                    <label class="block font-bold text-zinc-300 mb-1">Shipping Address / Delivery Notes</label>
+                    <textarea id="cust-address" required rows="3" class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl p-3 focus:outline-none focus:border-red-600" placeholder="Street address, city, zip code, or local meetup notes..."></textarea>
                 </div>
-                <button type="submit" class="w-full py-4 bg-gradient-to-r from-sky-400 to-indigo-500 text-slate-950 font-extrabold rounded-xl transition shadow-lg mt-4 cursor-pointer">Place Order & Send Details</button>
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-red-600 to-red-800 text-white font-extrabold rounded-xl transition shadow-lg mt-4 cursor-pointer">Place Order & Send Details</button>
             </form>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-800 py-16 text-slate-400 text-sm mt-auto">
+    <footer class="bg-black border-t border-zinc-900 py-16 text-zinc-400 text-sm mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
             <div class="space-y-4">
                 <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center font-extrabold text-sm text-slate-950 shadow">J1</div>
+                    <div class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center font-extrabold text-sm text-white shadow">J1</div>
                     <span class="text-lg font-black tracking-tight text-white">Just One Layer</span>
                 </div>
-                <p class="text-slate-400 text-sm leading-relaxed">Clean, minimalist decals, apparel, and handmade goods.</p>
+                <p class="text-zinc-400 text-sm leading-relaxed">Clean, minimalist decals, apparel, and handmade goods.</p>
             </div>
             <div>
                 <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Navigation</h4>
                 <ul class="space-y-2.5">
-                    <li><a href="index.html" class="hover:text-sky-400 transition">Home</a></li>
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Shop All</a></li>
-                    <li><a href="story.html" class="hover:text-sky-400 transition">Our Story</a></li>
-                    <li><a href="faq.html" class="hover:text-sky-400 transition">FAQ</a></li>
-                    <li><a href="guide.html" class="hover:text-sky-400 transition">Guide</a></li>
-                    <li><a href="tos.html" class="hover:text-sky-400 transition">Terms of Service</a></li>
+                    <li><a href="index.html" class="hover:text-red-500 transition">Home</a></li>
+                    <li><a href="shop.html" class="hover:text-red-500 transition">Shop All</a></li>
+                    <li><a href="story.html" class="hover:text-red-500 transition">Our Story</a></li>
+                    <li><a href="faq.html" class="hover:text-red-500 transition">FAQ</a></li>
+                    <li><a href="guide.html" class="hover:text-red-500 transition">Guide</a></li>
+                    <li><a href="tos.html" class="hover:text-red-500 transition">Terms of Service</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Categories</h4>
                 <ul class="space-y-2.5">
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Decals</a></li>
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Apparel & Gym Rat</a></li>
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Drinkware</a></li>
-                    <li><a href="shop.html" class="hover:text-sky-400 transition">Handmade Goods</a></li>
+                    <li><a href="shop.html" class="hover:text-red-500 transition">Decals</a></li>
+                    <li><a href="shop.html" class="hover:text-red-500 transition">Apparel & Gym Rat</a></li>
+                    <li><a href="shop.html" class="hover:text-red-500 transition">Drinkware</a></li>
+                    <li><a href="shop.html" class="hover:text-red-500 transition">Handmade Goods</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-4">Contact Us</h4>
-                <ul class="space-y-2.5 text-slate-300">
+                <ul class="space-y-2.5 text-zinc-300">
                     <li>Walker, LA Base</li>
-                    <li>Joshua: <a href="tel:2253646231" class="hover:text-sky-400 transition">(225) 364-6231</a></li>
-                    <li>Elise: <a href="tel:2259559585" class="hover:text-sky-400 transition">(225) 955-9585</a></li>
-                    <li><a href="mailto:just1lay2026@gmail.com" class="hover:text-sky-400 transition underline">just1lay2026@gmail.com</a></li>
+                    <li>Joshua: <a href="tel:2253646231" class="hover:text-red-500 transition">(225) 364-6231</a></li>
+                    <li>Elise: <a href="tel:2259559585" class="hover:text-red-500 transition">(225) 955-9585</a></li>
+                    <li><a href="mailto:just1lay2026@gmail.com" class="hover:text-red-500 transition underline">just1lay2026@gmail.com</a></li>
                 </ul>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 mt-10 border-t border-slate-900 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 mt-10 border-t border-zinc-900 text-center text-xs text-zinc-600">
             <p>&copy; 2026 Just One Layer. All rights reserved.</p>
         </div>
     </footer>
@@ -189,8 +190,6 @@
     <script>
         let cart = JSON.parse(localStorage.getItem('jol_cart')) || [];
         const STANDARD_SHIPPING_FEE = 6.00;
-        
-        // 🔑 REPLACE THIS URL WITH YOUR FORMSPREE ENDPOINT ONCE CREATED
         const FORMSPREE_URL = "https://formspree.io/f/mvkgbwjk";
 
         function initShop() {
@@ -205,7 +204,7 @@
             CATEGORIES.forEach(cat => {
                 const btn = document.createElement('button');
                 btn.onclick = () => filterCategory(cat.id);
-                btn.className = "cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/60 cursor-pointer";
+                btn.className = "cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-zinc-900 text-zinc-300 hover:bg-zinc-800 hover:text-white border border-zinc-800 cursor-pointer";
                 btn.setAttribute('data-cat', cat.id);
                 btn.textContent = cat.name;
                 container.appendChild(btn);
@@ -215,9 +214,9 @@
         function filterCategory(catId) {
             document.querySelectorAll('.cat-btn').forEach(b => {
                 if(b.getAttribute('data-cat') === catId) {
-                    b.className = "cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-sky-500 text-slate-950 shadow-lg shadow-sky-500/20 cursor-pointer";
+                    b.className = "cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-red-600 text-white shadow-lg shadow-red-900/30 cursor-pointer";
                 } else {
-                    b.className = "cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/60 cursor-pointer";
+                    b.className = "cat-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-zinc-900 text-zinc-300 hover:bg-zinc-800 hover:text-white border border-zinc-800 cursor-pointer";
                 }
             });
             renderProducts(catId);
@@ -234,45 +233,45 @@
                 let optionsHtml = '';
                 if(p.options) {
                     if(p.options.sizes) {
-                        optionsHtml += `<div class="mb-3"><label class="block text-xs font-semibold text-slate-400 mb-1">Size / Option:</label><select id="opt-size-${p.id}" class="w-full bg-slate-800 border border-slate-700 text-white rounded-lg p-2 text-xs">`;
+                        optionsHtml += `<div class="mb-3"><label class="block text-xs font-semibold text-zinc-400 mb-1">Size / Option:</label><select id="opt-size-${p.id}" class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-lg p-2 text-xs">`;
                         p.options.sizes.forEach((s, idx) => {
                             optionsHtml += `<option value="${idx}">${s.name} (+$${s.priceModifier.toFixed(2)})</option>`;
                         });
                         optionsHtml += `</select></div>`;
                     }
                     if(p.options.colors) {
-                        optionsHtml += `<div class="mb-3"><label class="block text-xs font-semibold text-slate-400 mb-1">Color:</label><select id="opt-color-${p.id}" class="w-full bg-slate-800 border border-slate-700 text-white rounded-lg p-2 text-xs">`;
+                        optionsHtml += `<div class="mb-3"><label class="block text-xs font-semibold text-zinc-400 mb-1">Color:</label><select id="opt-color-${p.id}" class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-lg p-2 text-xs">`;
                         p.options.colors.forEach(c => { optionsHtml += `<option value="${c}">${c}</option>`; });
                         optionsHtml += `</select></div>`;
                     }
                     if(p.options.scents) {
-                        optionsHtml += `<div class="mb-3"><label class="block text-xs font-semibold text-slate-400 mb-1">Scent:</label><select id="opt-scent-${p.id}" class="w-full bg-slate-800 border border-slate-700 text-white rounded-lg p-2 text-xs">`;
+                        optionsHtml += `<div class="mb-3"><label class="block text-xs font-semibold text-zinc-400 mb-1">Scent:</label><select id="opt-scent-${p.id}" class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-lg p-2 text-xs">`;
                         p.options.scents.forEach(s => { optionsHtml += `<option value="${s}">${s}</option>`; });
                         optionsHtml += `</select></div>`;
                     }
                     if(p.options.styles) {
-                        optionsHtml += `<div class="mb-3"><label class="block text-xs font-semibold text-slate-400 mb-1">Style:</label><select id="opt-style-${p.id}" class="w-full bg-slate-800 border border-slate-700 text-white rounded-lg p-2 text-xs">`;
+                        optionsHtml += `<div class="mb-3"><label class="block text-xs font-semibold text-zinc-400 mb-1">Style:</label><select id="opt-style-${p.id}" class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-lg p-2 text-xs">`;
                         p.options.styles.forEach(st => { optionsHtml += `<option value="${st}">${st}</option>`; });
                         optionsHtml += `</select></div>`;
                     }
                 }
 
-                const badgeHtml = p.badge ? `<span class="absolute top-4 right-4 bg-amber-500/90 text-slate-950 font-bold text-xs px-3 py-1 rounded-full shadow">${p.badge}</span>` : '';
+                const badgeHtml = p.badge ? `<span class="absolute top-4 right-4 bg-red-600 text-white font-bold text-xs px-3 py-1 rounded-full shadow">${p.badge}</span>` : '';
 
                 const card = document.createElement('div');
-                card.className = "glass rounded-3xl overflow-hidden border border-slate-700/60 flex flex-col relative shadow-xl";
+                card.className = "glass rounded-3xl overflow-hidden border border-zinc-800 flex flex-col relative shadow-xl";
                 card.innerHTML = `
-                    <div class="relative h-56 bg-slate-800 overflow-hidden">
+                    <div class="relative h-56 bg-zinc-900 overflow-hidden">
                         <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
                         ${badgeHtml}
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <h3 class="text-lg font-bold text-white mb-2">${p.name}</h3>
-                        <p class="text-slate-400 text-xs mb-4 flex-grow leading-relaxed">${p.description}</p>
+                        <p class="text-zinc-400 text-xs mb-4 flex-grow leading-relaxed">${p.description}</p>
                         <div class="mb-4">${optionsHtml}</div>
-                        <div class="flex items-center justify-between pt-4 border-t border-slate-800 mt-auto">
-                            <span class="text-xl font-extrabold text-sky-400">$${p.basePrice.toFixed(2)}</span>
-                            ${p.inStock ? `<button onclick="addToCart('${p.id}')" class="px-4 py-2 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs rounded-xl transition shadow cursor-pointer">Add to Cart</button>` : `<span class="text-xs font-bold text-slate-500 px-3 py-2 bg-slate-800 rounded-xl">Unavailable</span>`}
+                        <div class="flex items-center justify-between pt-4 border-t border-zinc-800 mt-auto">
+                            <span class="text-xl font-extrabold text-red-500">$${p.basePrice.toFixed(2)}</span>
+                            ${p.inStock ? `<button onclick="addToCart('${p.id}')" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white font-bold text-xs rounded-xl transition shadow cursor-pointer">Add to Cart</button>` : `<span class="text-xs font-bold text-zinc-500 px-3 py-2 bg-zinc-900 rounded-xl">Unavailable</span>`}
                         </div>
                     </div>
                 `;
@@ -349,11 +348,11 @@
             const shippingBar = document.getElementById('shipping-bar');
 
             if(!container || cart.length === 0) {
-                if(container) container.innerHTML = `<p class="text-slate-500 text-center py-6 text-sm">Your cart is empty.</p>`;
+                if(container) container.innerHTML = `<p class="text-zinc-500 text-center py-6 text-sm">Your cart is empty.</p>`;
                 if(subtotalEl) subtotalEl.textContent = '$0.00';
                 if(shippingFeeEl) shippingFeeEl.textContent = '$0.00';
                 if(totalEl) totalEl.textContent = '$0.00';
-                if(shippingMsg) shippingMsg.innerHTML = `Add <span class="text-sky-400 font-bold">$30.00</span> more for <span class="text-emerald-400 font-bold">FREE Shipping!</span>`;
+                if(shippingMsg) shippingMsg.innerHTML = `Add <span class="text-red-500 font-bold">$30.00</span> more for <span class="text-white font-bold">FREE Shipping!</span>`;
                 if(shippingBar) shippingBar.style.width = '0%';
                 return;
             }
@@ -369,15 +368,15 @@
                 }
 
                 const div = document.createElement('div');
-                div.className = "flex items-center space-x-3 bg-slate-800/60 p-2.5 rounded-2xl border border-slate-700/50";
+                div.className = "flex items-center space-x-3 bg-zinc-900 p-2.5 rounded-2xl border border-zinc-800";
                 div.innerHTML = `
                     <img src="${item.image}" alt="" class="w-14 h-14 object-cover rounded-xl">
                     <div class="flex-grow">
                         <h4 class="text-xs font-bold text-white">${item.name}</h4>
-                        <p class="text-[10px] text-slate-400">${attrString}</p>
-                        <span class="text-xs font-extrabold text-sky-400">$${item.price.toFixed(2)}</span>
+                        <p class="text-[10px] text-zinc-400">${attrString}</p>
+                        <span class="text-xs font-extrabold text-red-500">$${item.price.toFixed(2)}</span>
                     </div>
-                    <button onclick="removeItem(${index})" class="text-slate-500 hover:text-rose-400 p-2 cursor-pointer"><i class="fa-solid fa-trash text-xs"></i></button>
+                    <button onclick="removeItem(${index})" class="text-zinc-500 hover:text-red-500 p-2 cursor-pointer"><i class="fa-solid fa-trash text-xs"></i></button>
                 `;
                 container.appendChild(div);
             });
@@ -388,10 +387,10 @@
             if(shippingBar) shippingBar.style.width = `${progressPercent}%`;
 
             if(subtotal >= threshold) {
-                if(shippingMsg) shippingMsg.innerHTML = `<i class="fa-solid fa-check-circle text-emerald-400 mr-1"></i> You unlocked <span class="text-emerald-400 font-bold">FREE Shipping!</span>`;
+                if(shippingMsg) shippingMsg.innerHTML = `<i class="fa-solid fa-check-circle text-red-500 mr-1"></i> You unlocked <span class="text-white font-bold">FREE Shipping!</span>`;
             } else {
                 let diff = (threshold - subtotal).toFixed(2);
-                if(shippingMsg) shippingMsg.innerHTML = `Add <span class="text-sky-400 font-bold">$${diff}</span> more for <span class="text-emerald-400 font-bold">FREE Shipping!</span>`;
+                if(shippingMsg) shippingMsg.innerHTML = `Add <span class="text-red-500 font-bold">$${diff}</span> more for <span class="text-white font-bold">FREE Shipping!</span>`;
             }
 
             const distanceRadio = document.querySelector('input[name="distance-check"]:checked');
